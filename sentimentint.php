@@ -37,6 +37,7 @@ class TweetSentiment {
 
 }
 
+
 function classify ($sentiment) {
 
 	$sentijson = json_decode($sentiment);
@@ -85,7 +86,6 @@ $connection = new TwitterOAuth("FczCx4sYVC73yQUOomCjiHaXA",
 							   "WrJZMaSB4c7tBcjRdmQhqV0GK8QuaAOZeRbsjxTgCqCpskL11z",
 							   $access_token,
 							   $access_token_secret);
-#$content = $connection->get("account/verify_credentials");
 $statuses = $connection->get("search/tweets",
 							array("q" => $_GET['keyword'], "lang" => "en"));
 #var_dump($statuses);
@@ -103,6 +103,7 @@ $highest_neg = 0;
 // SENTIMENT ANALYSIS BEGINS HERE. I KNOW WHO'S NAUGHTY AND WHO'S NICE            //
 ////////////////////////////////////////////////////////////////////////////////////
 $url = 'http://text-processing.com/api/sentiment/';
+$n_negs = 0; # Number of negative tweets
 
 for ($i=0; $i<15; $i++) {
 	$tmptweet = $statuses->statuses[$i]->text;
@@ -137,10 +138,15 @@ for ($i=0; $i<15; $i++) {
 
 	$sendsentiment[$i]['tweet'] = $tmptweet;
 	$sendsentiment[$i]['sentiment'] = $tmpsent;
+
+	if(strcmp($tmpsent,'neg') == 0) {
+		$n_negs += 1;
+	}
 }
 
 $sendsentiment['mp'] = $most_positive;
 $sendsentiment['mn'] = $most_negative;
+$sendsentiment['negs'] = $n_negs;
 echo json_encode($sendsentiment);
 
 
