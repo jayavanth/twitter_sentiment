@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <!-- I recommend you host this file on your own, since this will change without warning -->
+  <script src="libs/datamaps.world.min.js"></script>
+  <style type="text/css">
+    #bubbles {
+      height: 300px;
+      width: 300px;
+    }
+  </style>
+  <div id="bubbles"></div>
+ 
+     
+     <script>
+  var bubble_map = new Datamap({
+  element: document.getElementById("bubbles"),
+  geographyConfig: {
+    popupOnHover: false,
+    highlightOnHover: false
+  },
+  fills: {
+    defaultFill: '#787777',
+    neg: 'red',
+    pos: 'green',
+    neu: 'white'
+  }
+});
+
+  var Points = function(name,fillKey,latitude,longitude) {
+                this.name  = name;
+                this.fillKey = fillKey;
+                this.radius = 3,
+                this.latitude = latitude;
+                this.longitude = longitude;
+              };
+
+  var cb = new Points('Castle Bravo','neg',11.415,10.1619);
+  var tb = new Points('Tsar Bomba','pos',5,60.482,54.5854);
+
+  var xx = Array();
+  xx[0] = cb;
+  xx[1] = tb;
+
+
+bubble_map.bubbles(
+xx, {
+  popupTemplate: function(geo, data) {
+    return '<div class="hoverinfo"> Name:' + data.name + ' Sentiment:' + data.fillKey
+  }
+});
+     </script>
+</body>
