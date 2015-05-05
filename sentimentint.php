@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");         
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-        header("Access-Control-Allow-Headers:        {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+        header("Access-Control-Allow-Headers:{$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
     exit(0);
 }
@@ -81,9 +81,13 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 $access_token =  "62479244-Lom37k34KFp24wnWmSr8TLnHEycWFu4ROyGjdrWfV";
 $access_token_secret =  "gVdM4CwStcp7yDjhGv9ONOt33v2YhLcYylEFgtx9YN5Vq";
-$connection = new TwitterOAuth("FczCx4sYVC73yQUOomCjiHaXA", "WrJZMaSB4c7tBcjRdmQhqV0GK8QuaAOZeRbsjxTgCqCpskL11z", $access_token, $access_token_secret);
+$connection = new TwitterOAuth("FczCx4sYVC73yQUOomCjiHaXA",
+							   "WrJZMaSB4c7tBcjRdmQhqV0GK8QuaAOZeRbsjxTgCqCpskL11z",
+							   $access_token,
+							   $access_token_secret);
 #$content = $connection->get("account/verify_credentials");
-$statuses = $connection->get("search/tweets", array("q" => $_GET['keyword']));
+$statuses = $connection->get("search/tweets",
+							array("q" => $_GET['keyword'], "lang" => "en"));
 #var_dump($statuses);
 
 $ts = array();
@@ -95,9 +99,9 @@ $highest_pos = 0;
 $highest_neg = 0;
 
 
-////////////////////////////////////////////////////////////////////////////////////////
-// SENTIMENT ANALYSIS BEGINS HERE. I KNOW WHO'S NAUGHTY AND WHO'S NICE
-////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+// SENTIMENT ANALYSIS BEGINS HERE. I KNOW WHO'S NAUGHTY AND WHO'S NICE            //
+////////////////////////////////////////////////////////////////////////////////////
 $url = 'http://text-processing.com/api/sentiment/';
 
 for ($i=0; $i<15; $i++) {
@@ -106,7 +110,6 @@ for ($i=0; $i<15; $i++) {
 
 	$data = array('text' => $tmptweet);
 
-	// use key 'http' even if you send the request to https://...
 	$options = array(
 	    'http' => array(
 	        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -132,9 +135,6 @@ for ($i=0; $i<15; $i++) {
 		$most_negative = $i;
 	}
 
-	//$ts[$i] = new TweetSentiment($tmptweet,$tmpsent);
-	//echo ($ts[$i]->get_tweet_sentiment());
-	//echo ('<br>');
 	$sendsentiment[$i]['tweet'] = $tmptweet;
 	$sendsentiment[$i]['sentiment'] = $tmpsent;
 }

@@ -68,4 +68,9 @@ $(document).ready(function(){
       });
       $('#keyword').focusout('keyup',function() {$('#keyword').valid();});
 
+
+      $('#clearbtn').click(function () {
+        $('#mainform').trigger('reset');
+        $('#disptweets').empty();
+      });
 });
