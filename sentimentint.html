@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>eBay</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap-paginator.min.js"></script>
+    <link rel="stylesheet" href="sentimentint.css">
+    <script type="text/javascript" src="sentimentint.js"></script> 
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 pagename">
+                <img src="http://cs-server.usc.edu:45678/hw/hw6/ebay.jpg" width=95 height=45/>
+                <label id="title_shopping" style="margin-left: -12px"> &nbsp; Shopping</label>
+            </div>
+        </div>        
+        <form id="mainform" class="form-horizontal" role="form">
+            <div class="form-group required">
+                <div class="row">
+                    <div class="col-md-2 text text-right">
+                        <label for="keywords" class="control-label" >Key Words:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="groupvalidation">
+                            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Enter keyword">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             
+            <div class="form-group">
+                <div class="row">
+                    <div class="btn-toolbar">
+                        <div class="col-md-8">
+                            <div class="wrapper">
+                            <input type="button" name="clear" value="Clear" id="clearbtn" class="btn btn-default"></input>                                
+                            <button type="submit" name="submit" value="Submit" class="btn btn-default btn-primary" id="searchbtn">Search</button>              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="row theline">
+        <div class="col-md-1" >
+        </div>
+        <div class="col-md-8" >
+            <hr style="color:black;">
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+    <div id="disptweets" class="container resultmargin"> </div>
+    <NOSCRIPT>
+    </body>
+    </html>
