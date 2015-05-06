@@ -5,6 +5,14 @@
 #bubbles {
   height: 300px;
   width: 300px;
+  margin-top: -10%;
+  margin-left: 12%;
+}
+
+#hatemeter {
+    width: 300px;
+    height: 200px;
+    margin-left: 12%;
 }
 @media all and (max-width: 603px) {
     
