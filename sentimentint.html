@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SentimenTint</title>
+    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -14,6 +15,11 @@
 
 </head>
 <body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="libs/datamaps.world.min.js"></script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-5 pagename">
@@ -65,8 +71,15 @@
 
     <script src="http://code.highcharts.com/modules/solid-gauge.js"></script>
 
-    <div style="width: 300px; height: 200px; margin-left: 6.5%" id="hatemeter">
-        <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
+    <div class="row">
+        <div class="col-md-5">
+            <div style="width: 300px; height: 200px; margin-left: 6.5%" id="hatemeter">
+                <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div id="bubbles"> </div>
+        </div>
     </div>
 
     <div class="row">

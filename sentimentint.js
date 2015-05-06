@@ -105,19 +105,57 @@ function display_meter() {
     }, 2000);
 
 }
+var Point = function(name,fillKey,latitude,longitude) {
+        this.name  = name;
+        this.fillKey = fillKey;
+        this.radius = 3,
+        this.latitude = latitude;
+        this.longitude = longitude;
+        };
+
 
     function printTweets(myJSON) {
         var most_negative = myJSON.mn;
         var most_positive = myJSON.mp;
 
-        // var neg_indicator = 'list-group-item-danger';
-        // var pos_indicator = 'list-group-item-success';
+        var bubble_map = new Datamap({
+            element: document.getElementById("bubbles"),
+            geographyConfig: {
+                popupOnHover: false,
+                highlightOnHover: false
+            },
+            fills: {
+                defaultFill: '#787777',
+                neg: 'red',
+                pos: 'green',
+                neu: 'white'
+            }
+        });
+
+
+        var Point = function(name,fillKey,latitude,longitude) {
+                this.name  = name;
+                this.fillKey = fillKey;
+                this.radius = 3,
+                this.latitude = latitude;
+                this.longitude = longitude;
+                };
 
         var N = 15; // Number of tweets hardcoded
         var tweets = '<ul class="list-group">';
+        var loc = '';
+        var screen_name = '';
+        var tsent = '';
+        var tlat = 0.0;
+        var tlng = 0.0;
+        var has_geo = false;
+        //var address = 'http://maps.googleapis.com/maps/api/geocode/json?address=';
+
+        var points = Array();
+        var num_points = 0;
+
 
         for (var i=0;i<15;i++) {
-
             if (i==most_negative) {
                 tweets += '<li class="list-group-item list-group-item-danger">'+myJSON[i].tweet+'</li>';
             }
@@ -127,9 +165,24 @@ function display_meter() {
             else {
                 tweets += '<li class="list-group-item">'+myJSON[i].tweet+'</li>';
             }
-        
+            loc = myJSON[i].location;
+            screen_name = myJSON[i].screen_name;
+            tsent = myJSON[i].sentiment;
+            tlat = myJSON[i].latitude;
+            tlng = myJSON[i].longitude;
+
+            //loc = 'New York'
+            if (loc.length != 0) {
+                            console.log(tlat + ' ' + tlng);
+
+                points[num_points] = new Point(screen_name,tsent,parseFloat(tlat),parseFloat(tlng));
+                num_points++;
+            }
+
         }
         tweets += '</ul>';
+
+        bubble_map.bubbles(points);
 
         jnegs = myJSON.negs;
         display_meter();

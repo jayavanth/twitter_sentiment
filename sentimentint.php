@@ -108,6 +108,10 @@ $n_negs = 0; # Number of negative tweets
 for ($i=0; $i<15; $i++) {
 	$tmptweet = $statuses->statuses[$i]->text;
 	$tmpsent = "something wrong";
+	$screen_name = $statuses->statuses[$i]->user->screen_name; # temp
+	$location = $statuses->statuses[$i]->user->location; # temp
+	$latitude = 0.0;
+	$longitude = 0.0;
 
 	$data = array('text' => $tmptweet);
 
@@ -136,8 +140,33 @@ for ($i=0; $i<15; $i++) {
 		$most_negative = $i;
 	}
 
+	// Get latitude and longitude here
+	if($location != '') {
+		$address = urlencode(trim($location));
+		$gmap_url = 'http://maps.google.com/maps/api/geocode/json?address='.$address;
+
+		$gmaps_get = file_get_contents($gmap_url);
+
+		$gmaps_json = json_decode($gmaps_get,true);
+
+		if($gmaps_json['status'] == 'OK') {
+			$latitude = $gmaps_json['results'][0]['geometry']['location']['lat'];
+			$longitude = $gmaps_json['results'][0]['geometry']['location']['lng'];
+		}
+		else {
+			$location = '';
+			$latitude = 0.0;
+			$longitude = 0.0;
+		}
+	// Done getting all location data
+	}
+
 	$sendsentiment[$i]['tweet'] = $tmptweet;
 	$sendsentiment[$i]['sentiment'] = $tmpsent;
+	$sendsentiment[$i]['screen_name'] = $screen_name;
+	$sendsentiment[$i]['location'] = $location;
+	$sendsentiment[$i]['latitude'] = $latitude;
+	$sendsentiment[$i]['longitude'] = $longitude;
 
 	if(strcmp($tmpsent,'neg') == 0) {
 		$n_negs += 1;

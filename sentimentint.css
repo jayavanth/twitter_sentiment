@@ -2,6 +2,10 @@
 .btn{ 
 	margin-left: 4px 
 }
+#bubbles {
+  height: 300px;
+  width: 300px;
+}
 @media all and (max-width: 603px) {
     
     .form-control {
