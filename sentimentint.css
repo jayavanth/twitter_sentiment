@@ -3,16 +3,19 @@
 	margin-left: 4px 
 }
 #bubbles {
-  height: 300px;
-  width: 300px;
-  margin-top: -10%;
-  margin-left: 12%;
+  height: 350px;
+  width: 350px;
 }
 
 #hatemeter {
     width: 300px;
     height: 200px;
     margin-left: 12%;
+}
+
+#histogram {
+    width: 300px;
+    height: 200px;
 }
 @media all and (max-width: 603px) {
     
@@ -51,7 +54,7 @@
 
 }
 
-@media all and (min-width: 605px) and (max-width: 767px) {
+@media all and (min-width: 605px) and (max-width: 1203px) {
 
 
     .form-control {
@@ -84,54 +87,7 @@
     }
     
 }
-@media all and (min-width: 768px) and (max-width: 992px) {
 
-    .form-control {
-        margin-left: 5%;        
-        width: 90%;
-    }
-    .text-right {
-        text-align: left;
-        margin-left: 5%;
-    }    
-
-    .control-label {
-        align: left;
-    }
-
-    .wrapper {
-        float: left;
-        margin-left: 5%;
-    }
-
-    .theline {
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-    .pagename {
-        margin-left: 3%;
-    }
-    .resultmargin {
-        margin-left: 3%;
-    }      
-
-}
-@media all and (min-width: 993px) and (max-width: 1204px) {
-    .control-label {
-        align: left;
-    }
-
-    div.col-sm-5 {
-        margin-right: -12%
-    }
-    .wrapper {
-        float: right;
-    }
-    .pagename {
-        margin-left: 5%;
-    }  
-
-}
 
 @media all and (min-width: 1204px) {
 

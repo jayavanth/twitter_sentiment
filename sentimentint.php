@@ -104,6 +104,8 @@ $highest_neg = 0;
 ////////////////////////////////////////////////////////////////////////////////////
 $url = 'http://text-processing.com/api/sentiment/';
 $n_negs = 0; # Number of negative tweets
+$n_poss = 0; # Number of positive tweets
+$n_neus = 0; # Number of neutral tweets
 
 for ($i=0; $i<15; $i++) {
 	$tmptweet = $statuses->statuses[$i]->text;
@@ -170,12 +172,18 @@ for ($i=0; $i<15; $i++) {
 
 	if(strcmp($tmpsent,'neg') == 0) {
 		$n_negs += 1;
+	} else if (strcmp($tmpsent,'pos') == 0) {
+		$n_poss += 1;
+	} else if (strcmp($tmpsent,'neu') == 0) {
+		$n_neus += 1;
 	}
 }
 
 $sendsentiment['mp'] = $most_positive;
 $sendsentiment['mn'] = $most_negative;
 $sendsentiment['negs'] = $n_negs;
+$sendsentiment['poss'] = $n_poss;
+$sendsentiment['neus'] = $n_neus;
 echo json_encode($sendsentiment);
 
 

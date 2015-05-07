@@ -64,7 +64,14 @@ $(document).ready(function(){
                 min: 0,
                 max: 15,
                 title: {
-                    text: 'Hate Meter'
+                    text: 'Hate Meter',
+                    style: {
+                        color: 'dark grey'
+}                },
+                labels: {
+                    style: {
+                        color: 'dark grey'
+                    }
                 }
             },
 
@@ -106,11 +113,73 @@ $(document).ready(function(){
 
     }
 
+    function display_histogram (n_poss, n_negs, n_neus) {
+        var chart = new Highcharts.Chart({
+
+            chart: {
+                spacingBottom: 0,
+                spacingTop: 0,
+                spacingLeft: -22,
+                spacingRight: 0,        
+                renderTo: 'container-histo',
+                type: 'column',
+                backgroundColor:'rgba(0, 0, 0, 0)'
+            },
+            title: {
+                text: 'Sentiment Histogram',
+                style: {
+                    color: 'dark grey'
+                }
+            },
+
+            xAxis: {
+                categories: ['Positive', 'Negative', 'Neutral'],
+
+                labels: {
+                    style: {
+                        color: 'dark grey'
+                    }
+                }
+                
+            },
+            
+            yAxis: {
+                gridLineWidth: 0,
+                minorGridLineWidth: 0,
+                 labels: {
+                    enabled: false,
+                    style: {
+                        color: 'dark grey'
+                    }
+                }       
+            },
+            
+            
+            plotOptions: {
+                column: {
+                    groupPadding: 0,
+                    pointPadding: 0,
+                    borderWidth: 0
+                }
+            },
+
+            series: [{
+                showInLegend: false,
+                data: [{y: n_poss, color: '#228B22'},{y: n_negs, color: '#D42436'}, {y: n_neus, color: '#000080'}]
+            }],
+            credits: {
+              enabled: false
+            }
+
+        });
+
+    }
+
     // A class Point, that represents a point in datamaps
     var Point = function(name,fillKey,latitude,longitude) {
             this.name  = name;
             this.fillKey = fillKey;
-            this.radius = 3,
+            this.radius = 3.5,
             this.latitude = latitude;
             this.longitude = longitude;
             };
@@ -120,8 +189,14 @@ $(document).ready(function(){
         var most_negative = myJSON.mn;
         var most_positive = myJSON.mp;
 
+        // Get number of positives, negatives and neutral tweets for histogram
+        var n_poss = myJSON.poss;
+        var n_negs = myJSON.negs;
+        var n_neus = myJSON.neus;
+
         $('svg.datamap').remove(); // Clear any datamaps so that new ones can be plotted
         $('.datamaps-hoverover').remove(); // Clear hoverovers
+        $('#container-histo').empty(); // Clear histogram
 
 
         var bubble_map = new Datamap({
@@ -134,7 +209,7 @@ $(document).ready(function(){
                 defaultFill: '#787777',
                 neg: 'red',
                 pos: 'green',
-                neu: 'white'
+                neu: 'blue'
             }
         });
 
@@ -182,6 +257,7 @@ $(document).ready(function(){
 
         jnegs = myJSON.negs;
         display_meter();
+        display_histogram(n_poss,n_negs,n_neus);
         $('#disptweets').html(tweets);
     }
 
@@ -198,6 +274,7 @@ $(document).ready(function(){
         },
         submitHandler:  function(form) {
                 $.ajax({
+                    //url: 'http://sentimentint2-env.elasticbeanstalk.com/sentiment/sentimentint.php',
                     url: 'sentimentint.php',
                     type: 'GET',
                     data: $('#mainform').serialize(),
@@ -232,5 +309,6 @@ $(document).ready(function(){
         $('svg.datamap').remove();
         $('.datamaps-hoverover').remove();
         $('.highcharts-data-labels').html('');
+        $('#container-histo').empty(); 
       });
 });
