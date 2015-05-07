@@ -6,11 +6,13 @@
     <meta content="utf-8" http-equiv="encoding">
     <title>SentimenTint</title>
     
+    <!-- Load jquery, bootstrap libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap-paginator.min.js"></script>
+    <!-- Load my css and js -->
     <link rel="stylesheet" href="sentimentint.css">
     <script type="text/javascript" src="sentimentint.js"></script> 
 
@@ -22,12 +24,13 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <script src="libs/datamaps.world.min.js"></script>
+    <!-- Fluid container -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-5 pagename">
                 <img src="https://g.twimg.com/Twitter_logo_blue.png" height=45/>
             </div>
-        </div>        
+        </div>
         <form id="mainform" class="form-horizontal" role="form">
             <div class="form-group required">
                 <div class="row">
@@ -48,7 +51,7 @@
                     <div class="btn-toolbar">
                         <div class="col-md-8">
                             <div class="wrapper">
-                            <input type="button" name="clear" value="Clear" id="clearbtn" class="btn btn-default"></input>                                
+                            <input type="button" name="clear" value="Clear" id="clearbtn" class="btn btn-default"></input>
                             <button type="submit" name="submit" value="Submit" class="btn btn-default btn-primary" id="searchbtn">Search</button>              
                             </div>
                         </div>
@@ -67,31 +70,38 @@
         <div class="col-md-3">
         </div>
     </div>
-    <!-- High charts -->
+    <!-- Highcharts includes-->
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
-
     <script src="http://code.highcharts.com/modules/solid-gauge.js"></script>
 
     <div class="row">
-        <div class="col-md-3">
+        <!-- Gauge -->
+        <div class="col-md-3 visual_elements">
             <div id="hatemeter">
                 <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
             </div>
         </div>
-        <div class="col-md-3">
+        <!-- Histogram -->
+        <div class="col-md-3 visual_elements">
             <div id="histogram">
                 <div id="container-histo" style="height: 200px; width=300px"></div>
             </div>
         </div>
-        <div class="col-md-3">
+        <!-- Map -->
+        <div class="col-md-3 visual_elements">
             <div id="bubbles" style="height: 200px; width=300px; float:none"> </div>
         </div>
+        <!-- Dummy -->
+        <div class="col-md-3"></div>
     </div>
 
+    <!-- Tweets -->
     <div class="row">
             <div id="disptweets" class="container resultmargin"> </div>
     </div>
+    <!-- If no results found -->
+    <div class="failure"></div>
     <NOSCRIPT>
     </body>
     </html>

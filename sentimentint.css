@@ -10,12 +10,20 @@
 #hatemeter {
     width: 300px;
     height: 200px;
-    margin-left: 12%;
+    margin-left: 10%;
 }
 
 #histogram {
     width: 300px;
     height: 200px;
+
+}
+div.visual_elements {
+    padding: 10px;
+}
+div.failure {
+    font: bold medium Georgia;
+    text-align: center;
 }
 @media all and (max-width: 603px) {
     
@@ -54,7 +62,7 @@
 
 }
 
-@media all and (min-width: 605px) and (max-width: 1203px) {
+@media all and (min-width: 604px) and (max-width: 1203px) {
 
 
     .form-control {
@@ -102,5 +110,8 @@
         margin-left: 3%;
         width: 75%;
     } 
+    .theline {
+        margin-left: -5%;
+    }
   
 }

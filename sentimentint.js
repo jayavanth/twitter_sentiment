@@ -32,7 +32,7 @@ $(document).ready(function(){
             yAxis: {
                 stops: [
                     [0.1, '#55BF3B'], // green
-                    [0.5, '#DDDF0D'], // yellow
+                    [0.3, '#DDDF0D'], // yellow
                     [0.8, '#DF5353'] // red
                 ],
                 lineWidth: 0,
@@ -126,9 +126,10 @@ $(document).ready(function(){
                 backgroundColor:'rgba(0, 0, 0, 0)'
             },
             title: {
-                text: 'Sentiment Histogram',
+                text: 'Histogram',
                 style: {
-                    color: 'dark grey'
+                    color: 'dark grey',
+                    size: '10px'
                 }
             },
 
@@ -186,6 +187,25 @@ $(document).ready(function(){
 
 
     function printTweets(myJSON) {
+
+        // Clean everything first
+        $('div.failure').empty(); // Clear any failure text
+        $('svg.datamap').remove(); // Clear any datamaps so that new ones can be plotted
+        $('.datamaps-hoverover').remove(); // Clear hoverovers
+        $('#container-histo').empty(); // Clear histogram
+
+        var ack = myJSON.ack;
+
+        if(ack == 'failure') { // Clear everything and display only failure
+            
+            $('#disptweets').empty();
+            $('svg').html('');
+            $('.highcharts-data-labels').html('');
+
+            $('div.failure').html('No results found!');
+            return;
+        }
+
         var most_negative = myJSON.mn;
         var most_positive = myJSON.mp;
 
@@ -194,13 +214,11 @@ $(document).ready(function(){
         var n_negs = myJSON.negs;
         var n_neus = myJSON.neus;
 
-        $('svg.datamap').remove(); // Clear any datamaps so that new ones can be plotted
-        $('.datamaps-hoverover').remove(); // Clear hoverovers
-        $('#container-histo').empty(); // Clear histogram
+
 
 
         var bubble_map = new Datamap({
-            element: document.getElementById("bubbles"),
+            element: document.getElementById('bubbles'),
             geographyConfig: {
                 popupOnHover: false,
                 highlightOnHover: false
@@ -214,7 +232,7 @@ $(document).ready(function(){
         });
 
 
-        var N = 15; // Number of tweets hardcoded
+        var N = parseInt(myJSON.n_tweets);
         var tweets = '<ul class="list-group">';
         var loc = '';
         var screen_name = '';
@@ -228,7 +246,7 @@ $(document).ready(function(){
         var num_points = 0;
 
 
-        for (var i=0;i<15;i++) {
+        for (var i=0;i<N;i++) {
             if (i==most_negative) {
                 tweets += '<li class="list-group-item list-group-item-danger">'+myJSON[i].tweet+'</li>';
             }
@@ -310,5 +328,6 @@ $(document).ready(function(){
         $('.datamaps-hoverover').remove();
         $('.highcharts-data-labels').html('');
         $('#container-histo').empty(); 
+        $("div.failure").empty();
       });
 });
