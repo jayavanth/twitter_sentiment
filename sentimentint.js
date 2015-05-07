@@ -165,7 +165,7 @@ $(document).ready(function(){
 
             series: [{
                 showInLegend: false,
-                data: [{y: n_poss, color: '#228B22'},{y: n_negs, color: '#D42436'}, {y: n_neus, color: '#000080'}]
+                data: [{y: n_poss, color: '#22BB22'},{y: n_negs, color: '#D42436'}, {y: n_neus, color: '#7040B0'}]
             }],
             credits: {
               enabled: false
@@ -209,7 +209,7 @@ $(document).ready(function(){
                 defaultFill: '#787777',
                 neg: 'red',
                 pos: 'green',
-                neu: 'blue'
+                neu: '#7040B0'
             }
         });
 
