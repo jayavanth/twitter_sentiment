@@ -21,8 +21,8 @@ List of all tweets from twitter API. Red indicates most-negative tweet and Green
 * Google Maps API for Geocoding
 
 ## Libraries used
-* Twitter OAuth for PHP [link](https://github.com/abraham/twitteroauth)
+* [Twitter OAuth for PHP](https://github.com/abraham/twitteroauth)
 * jQuery
 * Bootstrap
 * Highcharts
-* Datamaps [link](http://datamaps.github.io/)
+* [Datamaps](http://datamaps.github.io/)
