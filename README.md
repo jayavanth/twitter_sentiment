@@ -1,5 +1,5 @@
 # SentimenTint
-A simple webapp which analyses sentiments of tweets given a keyword/handle/hashtag.
+A simple responsive webapp which analyses sentiments of tweets given a keyword/handle/hashtag.
 
 # Usage
 * Search: Searches for a keyword/handle/hashtag
